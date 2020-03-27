@@ -1,16 +1,37 @@
 const ctx = canvas.getContext('2d');
 
+let score = 0;
+const brickRowCount = 11;
+const brickColumnCount = 5;
+const bricks = [];
+
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
   if (w < 2 * r) r = w / 2;
   if (h < 2 * r) r = h / 2;
   this.beginPath();
   this.moveTo(x + r, y);
-  this.arcTo(x + w, y, x + w, y + h, r);
-  this.arcTo(x + w, y + h, x, y + h, r);
-  this.arcTo(x, y + h, x, y, r);
-  this.arcTo(x, y, x + w, y, r);
+  this.arcTo(x + w, y, x + w, y + h, r / 2);
+  this.arcTo(x + w, y + h, x, y + h, r / 2);
+  this.arcTo(x, y + h, x, y, r / 2);
+  this.arcTo(x, y, x + w, y, r / 2);
   this.closePath();
   return this;
+}
+
+function decideBrickColor(key) {
+  if (key % 6 === 0) {
+    return "#efc40f";
+  } else if (key % 6 === 1) {
+    return "#ff6200";
+  } else if (key % 6 === 2) {
+    return "#df18c1";
+  } else if (key % 6 === 3) {
+    return "#21d511";
+  } else if (key % 6 === 4) {
+    return "#4399de";
+  } else if (key % 6 === 5) {
+    return "#5639cb";
+  }
 }
 
 const ball = {
@@ -31,11 +52,29 @@ const paddle = {
   speed: 8
 }
 
-function drawPaddle() {
-  ctx.beginPath();
-  ctx.roundRect(paddle.x, paddle.y, paddle.width, paddle.height, paddle.height / 2);
-  ctx.fillStyle = "#ffffffbe";
-  ctx.fill();
+const brickPrototype = {
+  w: 70,
+  h: 20,
+  padding: 10,
+  offsetX: 45,
+  offsetY: 60,
+  visible: true
+}
+
+function createBricks() {
+  for (let i = 0; i < brickRowCount; i++) {
+    bricks[i] = [];
+    for (let j = 0; j < brickColumnCount; j++) {
+      const x = i * (brickPrototype.padding + brickPrototype.w) + brickPrototype.offsetX;
+      const y = j * (brickPrototype.padding + brickPrototype.h) + brickPrototype.offsetY;
+      bricks[i][j] = {
+        key: i + j,
+        x,
+        y,
+        ...brickPrototype
+      }
+    }
+  }
 }
 
 function drawBall() {
@@ -46,5 +85,35 @@ function drawBall() {
   ctx.closePath();
 }
 
-drawBall();
-drawPaddle();
+function drawPaddle() {
+  ctx.roundRect(paddle.x, paddle.y, paddle.width, paddle.height, paddle.height / 2);
+  ctx.fillStyle = "#ffffffbe";
+  ctx.fill();
+}
+
+function drawScore() {
+  ctx.font = '20px Lato';
+  ctx.fillStyle = "#ffffffbe";
+  ctx.fillText(`Score: ${score}`, canvas.width - 100, 30);
+}
+
+function drawBricks() {
+  bricks.forEach(row => {
+    row.forEach(brick => {
+      ctx.roundRect(brick.x, brick.y, brick.w, brick.h, brick.h / 2);
+      ctx.fillStyle = brick.visible ? decideBrickColor(brick.key) : 'transparent';
+      ctx.fill();
+    })
+  })
+
+}
+
+function draw() {
+  drawBall();
+  drawPaddle();
+  drawScore();
+  drawBricks();
+}
+
+createBricks();
+draw();
