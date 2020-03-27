@@ -1,0 +1,12 @@
+1. create layout -DONE
+2. create canvas context -DONE
+3. create the ball
+4. create the paddle
+5. create bricks
+6. draw score
+7. add update() -Animate by requestAnimationFrame(cb)
+8. move paddle by adding handler so keyboard events
+9. move ball
+10. add wall boundries(collision detection)
+11. increase score when bricks break
+12. losing logic- redraw bricks, reset score, update scoreboard if necessary

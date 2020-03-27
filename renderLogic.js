@@ -1,5 +1,4 @@
 const canvas = document.querySelector('#canvas');
-const ctx = canvas.getContext('2d');
 const qmark = document.querySelector('#rules');
 const ruleContainer = document.querySelector('.rule-container');
 const backdrop = document.querySelector('.rule-backdrop');
