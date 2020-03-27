@@ -1,3 +1,14 @@
+:root {
+  --yellow: #efc40f;
+  --orange: #ff6200;
+  --pink: #df18c1;
+  --green: #21d511;
+  --blue: #4399de;
+  --red: #e32f56;
+  --purple: #5639cb;
+  --darkgray: #2c2c2c;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,12 +18,124 @@
 body {
   background-color: black;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
 }
 
+.scoreboard {
+  height: 50vh;
+  background-color: black;
+  width: 400px;
+  margin: 0 1rem;
+  border-radius: 10px;
+  overflow: scroll
+}
+
+.board-title {
+  font-size: 1rem;
+  padding-bottom: 2rem;
+  color: #ffffffbe;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.scoreboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  height: 100vh;
+  background-color: var(--darkgray);
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
+  margin: 0 1rem;
+}
+
+.title {
+  font-family: 'Press Start 2P', cursive;
+  padding-bottom: 2rem;
+  font-size: 2rem;
+}
+
 #canvas {
-  background-color: rgb(44, 44, 44);
+  background-color: var(--darkgray);
   border-radius: 5px;
+}
+
+.title--orange {
+  color: var(--orange);
+}
+
+.title--yellow {
+  color: var(--yellow);
+}
+
+.title--red {
+  color: var(--red);
+}
+
+.title--green {
+  color: var(--green);
+}
+
+.title--blue {
+  color: var(--blue);
+}
+
+.title--purple {
+  color: var(--purple);
+}
+
+.title--pink {
+  color: var(--pink);
+}
+
+.invisible {
+  display: none !important;
+}
+
+.small-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Audiowide', cursive;
+  padding: 0 3rem;
+  font-size: 1rem;
+  height: 100vh;
+  width: 100%;
+  color: #ffffffbe;
+}
+
+@media(max-width: 1450px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .title {
+    padding-top: 3rem;
+  }
+
+  .scoreboard-container {
+    width: 100vw;
+    order: 2;
+    height: 80vh;
+  }
+
+  .game-container {
+    width: 90vw;
+    order: 1;
+    margin-bottom: 2rem;
+  }
 }
