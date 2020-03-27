@@ -13,7 +13,7 @@ function handleLayoutChanges() {
 }
 
 function handleQmarkClick() {
-  ruleContainer.classList.toggle("invisible");
+  ruleContainer.classList.toggle("show");
   handleBackdrop();
 }
 
@@ -45,11 +45,11 @@ function updateUIVisibility() {
     info.classList.add('invisible');
     scoreboardContainer.classList.remove('invisible');
     gameContainer.classList.remove('invisible');
+    ruleContainer.classList.remove('invisible');
   } else {
     info.classList.remove('invisible');
     scoreboardContainer.classList.add('invisible');
     gameContainer.classList.add('invisible');
     ruleContainer.classList.add('invisible');
-    backdrop.classList.add('invisible');
   }
 }
