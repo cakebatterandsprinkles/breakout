@@ -7,11 +7,24 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>breakout game</title>
   <link rel="stylesheet" href="style.css">
-  <!-- <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css?family=Audiowide|Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <div class="rule-backdrop invisible"></div>
+  <div class="rule-container invisible">
+    <div>
+      <p class="rule-title">Rules</p>
+      <p>Use your right and left keys to move the paddle to bounce the ball up and break the blocks. If you miss the
+        ball,
+        your score and blocks will reset.</p>
+    </div>
+    <div class="footer">
+      <p>This is a HTML5 version of Atari Breakout, created solely for learning HTML5 Canvas API. Source Code: <a
+          href="https://github.com/cakebatterandsprinkles/breakout">cakebatterandsprinkles</a></p>
+      </p>
+    </div>
+  </div>
   <div class="small-screen">
     <p> This app is not optimized for smaller screens, please try using it from your desktop or ipads! </p>
     <p> Thanks! ♪(･ω･)ﾉ </p>
@@ -24,7 +37,8 @@
     <p class="title">
       <span class="title--orange">b</span><span class="title--yellow">r</span><span class="title--red">e</span><span
         class="title--green">a</span><span class="title--blue">k</span><span class="title--purple">o</span><span
-        class="title--pink">u</span><span class="title--yellow">t</span></p>
+        class="title--pink">u</span><span class="title--yellow">t</span><span class="title--rules" id="rules">?</span>
+    </p>
     <canvas id="canvas" width="1000" height="700"></canvas>
   </div>
   <script src="index.js"></script>

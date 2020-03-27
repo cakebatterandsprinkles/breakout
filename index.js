@@ -1,58 +1,55 @@
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
+const qmark = document.querySelector('#rules');
+const ruleContainer = document.querySelector('.rule-container');
+const backdrop = document.querySelector('.rule-backdrop');
 
-function handleFirstLayout() {
-  const info = document.querySelector('.small-screen');
-  const scoreboardContainer = document.querySelector('.scoreboard-container');
-  const gameContainer = document.querySelector('.game-container');
+window.addEventListener('resize', handleLayoutChanges);
+qmark.addEventListener('click', handleQmarkClick);
+
+function handleLayoutChanges() {
+  updateUIVisibility();
+  updateCanvasDimensions();
+}
+
+function handleQmarkClick() {
+  ruleContainer.classList.toggle("invisible");
+  handleBackdrop();
+}
+
+function handleBackdrop() {
+  backdrop.addEventListener('click', handleQmarkClick);
+  backdrop.classList.toggle("invisible");
+}
+
+handleLayoutChanges();
+
+function updateCanvasDimensions() {
   if (window.innerWidth >= 1250) {
-    info.classList.add('invisible');
-    scoreboardContainer.classList.remove('invisible');
-    gameContainer.classList.remove('invisible');
-  } else if (window.innerWidth < 1250 && window.innerWidth >= 1000) {
-    info.classList.add('invisible');
-    scoreboardContainer.classList.remove('invisible');
-    gameContainer.classList.remove('invisible');
+    canvas.width = 1000;
+    canvas.height = 700;
+  } else if (window.innerWidth >= 1000) {
     canvas.width = 800;
-    canvas.height = 560
-  } else if (window.innerWidth >= 760 && window.innerWidth < 1000) {
-    info.classList.add('invisible');
-    scoreboardContainer.classList.remove('invisible');
-    gameContainer.classList.remove('invisible');
+    canvas.height = 560;
+  } else if (window.innerWidth >= 760) {
     canvas.width = 700;
     canvas.height = 490;
-  } else if (window.innerWidth < 760) {
-    info.classList.remove('invisible');
-    scoreboardContainer.classList.add('invisible');
-    gameContainer.classList.add('invisible');
   }
 }
 
-window.addEventListener('resize', e => {
-  handleLayoutChanges(e)
-})
-
-function handleLayoutChanges(e) {
+function updateUIVisibility() {
   const info = document.querySelector('.small-screen');
   const scoreboardContainer = document.querySelector('.scoreboard-container');
   const gameContainer = document.querySelector('.game-container');
-  if (e.target.innerWidth < 1250 && e.target.innerWidth >= 1000) {
+  if (window.innerWidth >= 760) {
     info.classList.add('invisible');
     scoreboardContainer.classList.remove('invisible');
     gameContainer.classList.remove('invisible');
-    canvas.width = 800;
-    canvas.height = 560
-  } else if (e.target.innerWidth >= 760 && e.target.innerWidth < 1000) {
-    info.classList.add('invisible');
-    scoreboardContainer.classList.remove('invisible');
-    gameContainer.classList.remove('invisible');
-    canvas.width = 700;
-    canvas.height = 490;
-  } else if (e.target.innerWidth < 760) {
+  } else {
     info.classList.remove('invisible');
     scoreboardContainer.classList.add('invisible');
     gameContainer.classList.add('invisible');
+    ruleContainer.classList.add('invisible');
+    backdrop.classList.add('invisible');
   }
 }
-
-handleFirstLayout();
