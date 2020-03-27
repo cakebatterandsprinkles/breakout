@@ -1,10 +1,24 @@
 const ctx = canvas.getContext('2d');
 
 let score = 0;
-const brickRowCount = 11;
-const brickColumnCount = 5;
+let brickRowCount = 11;
+let brickColumnCount = 5;
 const bricks = [];
 
+window.addEventListener('resize', handleBrickNumChanges);
+
+function handleBrickNumChanges() {
+  if (window.innerWidth >= 1250) {
+    brickRowCount = 11;
+    brickColumnCount = 5;
+  } else if (window.innerWidth >= 1000) {
+    brickRowCount = 9;
+    brickColumnCount = 5;
+  } else if (window.innerWidth >= 760) {
+    brickRowCount = 8;
+    brickColumnCount = 5;
+  }
+}
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
   if (w < 2 * r) r = w / 2;
   if (h < 2 * r) r = h / 2;
@@ -62,6 +76,7 @@ const brickPrototype = {
 }
 
 function createBricks() {
+  handleBrickNumChanges();
   for (let i = 0; i < brickRowCount; i++) {
     bricks[i] = [];
     for (let j = 0; j < brickColumnCount; j++) {
