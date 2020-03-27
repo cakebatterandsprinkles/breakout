@@ -1,7 +1,7 @@
 1. create layout -DONE
 2. create canvas context -DONE
-3. create the ball
-4. create the paddle
+3. create the ball -DONE
+4. create the paddle -DONE
 5. create bricks
 6. draw score
 7. add update() -Animate by requestAnimationFrame(cb)
