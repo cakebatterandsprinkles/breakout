@@ -6,7 +6,7 @@
 6. draw score -DONE
 7. add update() -Animate by requestAnimationFrame(cb) -DONE
 8. move paddle by adding handler so keyboard events -DONE
-9. move ball
+9. move ball -DONE
 10. add wall boundries(collision detection)
 11. increase score when bricks break
 12. losing logic- redraw bricks, reset score, update scoreboard if necessary
