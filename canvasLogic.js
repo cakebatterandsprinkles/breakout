@@ -6,6 +6,33 @@ let brickColumnCount = 5;
 let stopped = false;
 const bricks = [];
 
+const ball = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  radius: 10,
+  dx: Math.ceil(Math.random() + 3 * 1.5),
+  dy: -Math.ceil(Math.random() + 3 * 1.5),
+  speed: 1
+}
+
+const paddle = {
+  x: canvas.width / 2 - 40,
+  y: canvas.height - 20,
+  width: 80,
+  height: 10,
+  dx: 0,
+  speed: 8
+}
+
+const brickPrototype = {
+  w: 70,
+  h: 20,
+  padding: 10,
+  offsetX: 45,
+  offsetY: 60,
+  visible: true
+}
+
 window.addEventListener('resize', handleBrickNumChanges);
 document.addEventListener('keydown', e => {
   if (e.key === "ArrowRight" || e.key === "Right") {
@@ -71,32 +98,7 @@ function decideBrickColor(key) {
   }
 }
 
-const ball = {
-  x: canvas.width / 2,
-  y: canvas.height / 2,
-  radius: 10,
-  dx: 4,
-  dy: -4,
-  speed: 1
-}
 
-const paddle = {
-  x: canvas.width / 2 - 40,
-  y: canvas.height - 20,
-  width: 80,
-  height: 10,
-  dx: 0,
-  speed: 8
-}
-
-const brickPrototype = {
-  w: 70,
-  h: 20,
-  padding: 10,
-  offsetX: 45,
-  offsetY: 60,
-  visible: true
-}
 
 function createBricks() {
   handleBrickNumChanges();
@@ -166,9 +168,12 @@ function moveBall() {
     ball.dy *= -1;
   }
 
-  if (ball.x - ball.radius > paddle.x && ball.x + ball.radius < paddle.x + paddle.width && ball.y + ball.radius > paddle.y) {
+  if (ball.x + ball.radius >= paddle.x &&
+    ball.x - ball.radius <= paddle.x + paddle.width &&
+    ball.y + ball.radius >= paddle.y) {
     ball.speed++;
     ball.dy = -ball.speed;
+    paddle.width = Math.ceil(Math.random() * 50) + 60;
 
     if (ball.speed >= 10) {
       ball.speed = 4
@@ -195,7 +200,6 @@ function moveBall() {
   })
 
   if (ball.y + ball.radius >= canvas.height) {
-    console.log("Bot");
     stop();
     draw();
   }
@@ -235,7 +239,7 @@ function stop() {
   ball.speed = 1;
   paddle.x = canvas.width / 2;
   paddle.dx = 0;
-  paddle.x = canvas.width / 2 - 40;
+  paddle.x = canvas.width / 2 - paddle.width / 2;
   paddle.y = canvas.height - 20;
 }
 
