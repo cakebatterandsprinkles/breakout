@@ -155,6 +155,7 @@ function moveBall() {
   if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
     ball.dy *= -1;
   }
+
   if (ball.x - ball.radius > paddle.x && ball.x + ball.radius < paddle.x + paddle.width && ball.y + ball.radius > paddle.y) {
     ball.speed++;
     ball.dy = -ball.speed;
@@ -162,6 +163,21 @@ function moveBall() {
       ball.speed = 4
     }
   }
+
+  bricks.forEach(column => {
+    column.forEach(brick => {
+      if (brick.visible) {
+        if (ball.x - ball.radius > brick.x &&
+          ball.x + ball.radius < brick.x + brick.width &&
+          ball.y - ball.radius < brick.y + brick.height &&
+          ball.y + ball.radius > brick.y
+        ) {
+          ball.dy *= -1;
+          brick.visible = false;
+        }
+      }
+    })
+  })
 }
 
 function draw() {
