@@ -67,7 +67,7 @@ const ball = {
   radius: 10,
   dx: 4,
   dy: -4,
-  speed: 4
+  speed: 1
 }
 
 const paddle = {
@@ -154,6 +154,13 @@ function moveBall() {
   }
   if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
     ball.dy *= -1;
+  }
+  if (ball.x - ball.radius > paddle.x && ball.x + ball.radius < paddle.x + paddle.width && ball.y + ball.radius > paddle.y) {
+    ball.speed++;
+    ball.dy = -ball.speed;
+    if (ball.speed >= 10) {
+      ball.speed = 4
+    }
   }
 }
 
