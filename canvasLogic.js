@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 let score = 0;
 let brickRowCount = 11;
 let brickColumnCount = 5;
+let stopped = false;
 const bricks = [];
 
 window.addEventListener('resize', handleBrickNumChanges);
@@ -17,6 +18,15 @@ document.addEventListener('keydown', e => {
 document.addEventListener('keyup', e => {
   if (e.key === "ArrowRight" || e.key === "Right" || e.key === "ArrowLeft" || e.key === "Left") {
     paddle.dx = 0;
+  }
+})
+
+document.addEventListener('keydown', e => {
+  if (e.key === "Spacebar" || e.key === " ") {
+    e.preventDefault();
+    score = 0;
+    stopped = false;
+    update();
   }
 })
 
@@ -159,25 +169,51 @@ function moveBall() {
   if (ball.x - ball.radius > paddle.x && ball.x + ball.radius < paddle.x + paddle.width && ball.y + ball.radius > paddle.y) {
     ball.speed++;
     ball.dy = -ball.speed;
+
     if (ball.speed >= 10) {
       ball.speed = 4
     }
   }
 
+  let hit = false;
+
   bricks.forEach(column => {
     column.forEach(brick => {
-      if (brick.visible) {
-        if (ball.x - ball.radius > brick.x &&
-          ball.x + ball.radius < brick.x + brick.width &&
-          ball.y - ball.radius < brick.y + brick.height &&
-          ball.y + ball.radius > brick.y
+      if (brick.visible && !hit) {
+        if (ball.x + ball.radius >= brick.x &&
+          ball.x - ball.radius <= brick.x + brick.w &&
+          ball.y - ball.radius <= brick.y + brick.h &&
+          ball.y + ball.radius >= brick.y
         ) {
+          hit = true;
           ball.dy *= -1;
           brick.visible = false;
+          increaseScore();
         }
       }
     })
   })
+
+  if (ball.y + ball.radius >= canvas.height) {
+    console.log("Bot");
+    stop();
+    draw();
+  }
+  if (score === (brickRowCount * brickColumnCount)) {
+    stop();
+    draw();
+  }
+}
+
+function increaseScore() {
+  score++;
+}
+
+function showAllBricks() {
+  bricks.forEach(col =>
+    col.forEach(brick => {
+      brick.visible = true;
+    }))
 }
 
 function draw() {
@@ -188,14 +224,30 @@ function draw() {
   drawBricks();
 }
 
+function stop() {
+  stopped = true;
+  showAllBricks();
+  score = 0;
+  ball.x = canvas.width / 2;
+  ball.y = canvas.height / 2;
+  ball.dx = 4;
+  ball.dy = -4;
+  ball.speed = 1;
+  paddle.x = canvas.width / 2;
+  paddle.dx = 0;
+  paddle.x = canvas.width / 2 - 40;
+  paddle.y = canvas.height - 20;
+}
+
 function update() {
   movePaddle();
   moveBall();
-
   draw();
-  requestAnimationFrame(update);
+
+  if (!stopped) {
+    requestAnimationFrame(update);
+  }
 }
 
 createBricks();
 draw();
-update();
