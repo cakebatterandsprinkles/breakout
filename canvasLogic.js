@@ -6,6 +6,19 @@ let brickColumnCount = 5;
 const bricks = [];
 
 window.addEventListener('resize', handleBrickNumChanges);
+document.addEventListener('keydown', e => {
+  if (e.key === "ArrowRight" || e.key === "Right") {
+    paddle.dx = paddle.speed;
+  } else if (e.key === "ArrowLeft" || e.key === "Left") {
+    paddle.dx = -paddle.speed;
+  }
+})
+
+document.addEventListener('keyup', e => {
+  if (e.key === "ArrowRight" || e.key === "Right" || e.key === "ArrowLeft" || e.key === "Left") {
+    paddle.dx = 0;
+  }
+})
 
 function handleBrickNumChanges() {
   if (window.innerWidth >= 1250) {
@@ -120,15 +133,33 @@ function drawBricks() {
       ctx.fill();
     })
   })
+}
 
+function movePaddle() {
+  paddle.x += paddle.dx;
+  if (paddle.x + paddle.width > canvas.width) {
+    paddle.x = canvas.width - paddle.width;
+  }
+  if (paddle.x < 0) {
+    paddle.x = 0
+  }
 }
 
 function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   drawPaddle();
   drawScore();
   drawBricks();
 }
 
+function update() {
+  movePaddle();
+
+  draw();
+  requestAnimationFrame(update);
+}
+
 createBricks();
 draw();
+update();
