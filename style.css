@@ -33,32 +33,6 @@ body {
   max-width: 100vw;
 }
 
-.scoreboard {
-  height: 50vh;
-  background-color: black;
-  width: 400px;
-  margin: 0 1rem;
-  border-radius: 10px;
-  overflow: scroll
-}
-
-.board-title {
-  font-size: 1rem;
-  padding-bottom: 2rem;
-  color: var(--cloudywhite);
-  font-family: 'Press Start 2P', cursive;
-}
-
-.scoreboard-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 30vw;
-  height: 100vh;
-  background-color: var(--darkgray);
-}
-
 .game-container {
   display: flex;
   flex-direction: column;
@@ -194,12 +168,6 @@ body {
 
   .title {
     padding-top: 3rem;
-  }
-
-  .scoreboard-container {
-    width: 100vw;
-    order: 2;
-    height: 80vh;
   }
 
   .game-container {

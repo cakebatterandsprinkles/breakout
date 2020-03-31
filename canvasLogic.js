@@ -33,7 +33,6 @@ const brickPrototype = {
   visible: true
 }
 
-window.addEventListener('resize', handleBrickNumChanges);
 document.addEventListener('keydown', e => {
   if (e.key === "ArrowRight" || e.key === "Right") {
     paddle.dx = paddle.speed;
@@ -57,6 +56,11 @@ document.addEventListener('keydown', e => {
   }
 })
 
+window.addEventListener('resize', () => {
+  createBricks();
+  draw();
+});
+
 function handleBrickNumChanges() {
   if (window.innerWidth >= 1250) {
     brickRowCount = 11;
@@ -69,6 +73,7 @@ function handleBrickNumChanges() {
     brickColumnCount = 5;
   }
 }
+
 CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
   if (w < 2 * r) r = w / 2;
   if (h < 2 * r) r = h / 2;
