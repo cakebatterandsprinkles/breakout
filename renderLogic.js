@@ -2,9 +2,17 @@ const canvas = document.querySelector('#canvas');
 const qmark = document.querySelector('#rules');
 const ruleContainer = document.querySelector('.rule-container');
 const backdrop = document.querySelector('.rule-backdrop');
+const directions = document.querySelector('.directions');
 
 window.addEventListener('resize', handleLayoutChanges);
 qmark.addEventListener('click', handleQmarkClick);
+window.addEventListener('keyup', handleGameStart)
+
+function handleGameStart(e) {
+  if (e.key === "Spacebar" || e.key === " ") {
+    directions.classList.add('invisible');
+  }
+}
 
 function handleLayoutChanges() {
   updateUIVisibility();
@@ -45,10 +53,12 @@ function updateUIVisibility() {
     scoreboardContainer.classList.remove('invisible');
     gameContainer.classList.remove('invisible');
     ruleContainer.classList.remove('invisible');
+    directions.classList.remove('invisible');
   } else {
     info.classList.remove('invisible');
     scoreboardContainer.classList.add('invisible');
     gameContainer.classList.add('invisible');
     ruleContainer.classList.add('invisible');
+    directions.classList.add('invisible');
   }
 }

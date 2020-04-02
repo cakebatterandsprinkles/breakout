@@ -50,9 +50,11 @@ document.addEventListener('keyup', e => {
 document.addEventListener('keydown', e => {
   if (e.key === "Spacebar" || e.key === " ") {
     e.preventDefault();
-    score = 0;
-    stopped = false;
-    update();
+    setTimeout(() => {
+      score = 0;
+      stopped = false;
+      update();
+    }, 1000);
   }
 })
 
@@ -102,8 +104,6 @@ function decideBrickColor(key) {
     return "#5639cb";
   }
 }
-
-
 
 function createBricks() {
   handleBrickNumChanges();

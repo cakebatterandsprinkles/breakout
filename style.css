@@ -158,6 +158,33 @@ body {
   background-color: var(--lightgray);
 }
 
+.directions {
+  background-color: var(--cloudywhite);
+  color: var(--darkgray);
+  width: 100%;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  transform: translateY(40vh);
+}
+
+.directions>*:first-child {
+  font-family: 'Audiowide', cursive;
+  font-size: 1.5rem;
+}
+
+.directions>*:last-child {
+  font-family: 'Audiowide', cursive;
+  font-size: .8rem;
+}
+
 @media(max-width: 1450px) {
   body {
     display: flex;
