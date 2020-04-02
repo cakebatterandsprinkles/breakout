@@ -55,6 +55,7 @@ document.addEventListener('keydown', e => {
       stopped = false;
       update();
     }, 500);
+    directions.classList.add('invisible');
   }
 })
 
@@ -248,7 +249,9 @@ function stop() {
   paddle.dx = 0;
   paddle.x = canvas.width / 2 - paddle.width / 2;
   paddle.y = canvas.height - 20;
-  directions.classList.remove('invisible');
+  if (window.innerWidth >= 760 && stopped === true) {
+    directions.classList.remove('invisible');
+  }
 }
 
 function update() {
