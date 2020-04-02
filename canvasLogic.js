@@ -4,7 +4,7 @@ let score = 0;
 let brickRowCount = 11;
 let brickColumnCount = 5;
 let stopped = false;
-const bricks = [];
+let bricks = [];
 
 const ball = {
   x: canvas.width / 2,
@@ -60,6 +60,7 @@ document.addEventListener('keydown', e => {
 
 window.addEventListener('resize', () => {
   createBricks();
+  stop();
   draw();
 });
 
@@ -107,6 +108,7 @@ function decideBrickColor(key) {
 
 function createBricks() {
   handleBrickNumChanges();
+  bricks = [];
   for (let i = 0; i < brickRowCount; i++) {
     bricks[i] = [];
     for (let j = 0; j < brickColumnCount; j++) {
