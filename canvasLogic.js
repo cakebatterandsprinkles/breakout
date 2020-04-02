@@ -54,7 +54,7 @@ document.addEventListener('keydown', e => {
       score = 0;
       stopped = false;
       update();
-    }, 1000);
+    }, 500);
   }
 })
 
@@ -246,6 +246,7 @@ function stop() {
   paddle.dx = 0;
   paddle.x = canvas.width / 2 - paddle.width / 2;
   paddle.y = canvas.height - 20;
+  directions.classList.remove('invisible');
 }
 
 function update() {
