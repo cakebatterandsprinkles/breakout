@@ -10,4 +10,6 @@ Use your right and left keys to move the paddle to bounce the ball up and break 
 
 https://cakebatterandsprinkles.github.io/breakout
 
+Music was provided from this link: https://www.youtube.com/watch?v=XEMQ-kj2nlo
+
 (>'-')> Have fun!
