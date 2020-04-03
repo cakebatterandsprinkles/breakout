@@ -1,4 +1,5 @@
 const ctx = canvas.getContext('2d');
+const audio = document.querySelector('.audio');
 
 let score = 0;
 let brickRowCount = 11;
@@ -56,6 +57,7 @@ document.addEventListener('keydown', e => {
       update();
     }, 500);
     directions.classList.add('invisible');
+    audio.play();
   }
 })
 
