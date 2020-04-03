@@ -8,6 +8,6 @@ Use your right and left keys to move the paddle to bounce the ball up and break 
 
 ## Demo:
 
-https://cakebatterandsprinkles.github.io
+https://cakebatterandsprinkles.github.io/breakout
 
 (>'-')> Have fun!
