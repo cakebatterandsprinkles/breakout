@@ -2,7 +2,7 @@
 
 :space_invader: Atari Breakout game remade with HTML5 Canvas API.
 
-**Demo:** https://cakebatterandsprinkles.github.io
+**Demo:** https://cakebatterandsprinkles.github.io/breakout
 
 ## Rules:
 
